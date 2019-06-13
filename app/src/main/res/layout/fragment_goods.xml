@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentGoods">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/goods"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/goods_item_zonghe"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="综合"
+                android:textColor="@android:color/black"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/goods_item_xiaoliang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="销量"
+                android:textColor="@android:color/black"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/goods_item_xinpin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="新品"
+                android:textColor="@android:color/black"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/goods_item_price"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="价格"
+                android:textColor="@android:color/black"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <com.example.fxg.ggg.MyViewPager
+            android:id="@+id/goods_vp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.example.fxg.ggg.MyViewPager>
+
+    </LinearLayout>
+
+</FrameLayout>
