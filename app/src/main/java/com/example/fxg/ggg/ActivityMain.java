@@ -1,5 +1,6 @@
 package com.example.fxg.ggg;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class ActivityMain extends AppCompatActivity implements View.OnClickListener {
     private TextView item_index, item_goods, item_huodong, item_me,store_name,store_fans;
+    private ImageButton button_serach;
     private ViewPager vp;
     private FragmentIndex oneFragment;
     private FragmentGoods twoFragment;
@@ -96,11 +99,13 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         item_me = (TextView) findViewById(R.id.item_me);
         store_name=findViewById(R.id.tv_store_name);
         store_fans=findViewById(R.id.tv_store_fans);
+        button_serach=findViewById(R.id.item_search);
 
         item_index.setOnClickListener(this);
         item_goods.setOnClickListener(this);
         item_huodong.setOnClickListener(this);
         item_me.setOnClickListener(this);
+        button_serach.setOnClickListener(this);
 
         vp = (ViewPager) findViewById(R.id.mainViewPager);
         oneFragment = new FragmentIndex();
@@ -134,6 +139,10 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.item_me:
                 vp.setCurrentItem(3, true);
+                break;
+            case R.id.item_search:
+                Intent intent=new Intent(this,SearchActivity.class);
+                startActivity(intent);
                 break;
         }
     }

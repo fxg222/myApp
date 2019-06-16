@@ -1,28 +1,16 @@
 package com.example.fxg.ggg;
 
-import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fxg.ggg.adapter.DetailsPicAdapter;
 import com.example.fxg.ggg.bean.GoodsBean;
 
-import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ActivityDetails extends AppCompatActivity {
     ImageView imageView1,imageView2,imageView3;
