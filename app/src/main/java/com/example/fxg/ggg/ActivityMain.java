@@ -1,10 +1,13 @@
 package com.example.fxg.ggg;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -23,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityMain extends AppCompatActivity implements View.OnClickListener {
+    LinearLayout my_message,cart,my;
     private TextView item_index, item_goods, item_huodong, item_me,store_name,store_fans;
     private ImageButton button_serach;
     private ViewPager vp;
@@ -34,6 +38,7 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
     private FragmentAdapter mFragmentAdapter;
     String name;
     int fans;
+    MD5Utils userid=new MD5Utils();
 
     private Handler handler=new Handler(){
         @Override
@@ -53,6 +58,12 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         //去除工具栏
         //getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((ActivityMain) this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((ActivityMain) this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        } //向用户请求读写权限
         initViews();
 
         DBdao dBdao=new DBdao();
@@ -88,10 +99,22 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    protected void onStart() {
+        super.onStart();
+        this.getDelegate().onStart();
+
+    }
+
     /**
      * 初始化布局View
      */
     private void initViews() {
+        my_message=findViewById(R.id.my_message);
+        cart=findViewById(R.id.cart);
+        my=findViewById(R.id.my);
+        my_message.setOnClickListener(this);
+        cart.setOnClickListener(this);
+        my.setOnClickListener(this);
 
         item_index = (TextView) findViewById(R.id.item_index);
         item_goods = (TextView) findViewById(R.id.item_goods);
@@ -143,6 +166,27 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
             case R.id.item_search:
                 Intent intent=new Intent(this,SearchActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.my_message:
+                break;
+            case R.id.cart:
+                startActivity(new Intent(this,CartActivity.class));
+                break;
+            case R.id.my:
+                userid.write();
+                jdbc relogin=new jdbc();
+                int i=relogin.relogin();
+                if (i==1)//若无登陆信息则跳转至登录页面，有则跳转至用户中心页面
+                {
+
+                    startActivity(new Intent(this, UserActivity.class));
+                }
+                else
+                {
+
+                    startActivity(new Intent(this,LoginActivity.class));
+                }
+                //startActivity(new Intent(this,MyActivity.class));
                 break;
         }
     }

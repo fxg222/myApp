@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="129dp"
+    android:layout_height="250dp"
+    android:paddingTop="3dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:paddingBottom="3dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/style">
+
+        <ImageView
+            android:id="@+id/imageView_url"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/video_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:paddingTop="2dp"
+            android:text="苹果型身体女孩如何穿出性感身材？最适合.." />
+
+        <TextView
+            android:id="@+id/video_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:text="蘑菇搭配师"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</LinearLayout>

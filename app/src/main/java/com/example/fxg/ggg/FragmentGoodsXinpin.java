@@ -1,5 +1,6 @@
 package com.example.fxg.ggg;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,7 +22,8 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentGoodsXinpin extends Fragment {
-
+    String sql;
+    String goods_name=null;
     GridView gv;
     DB db;
     View view;
@@ -32,7 +34,10 @@ public class FragmentGoodsXinpin extends Fragment {
     public FragmentGoodsXinpin() {
         // Required empty public constructor
     }
-
+    @SuppressLint("ValidFragment")
+    public FragmentGoodsXinpin(String goods_name) {
+        this.goods_name=goods_name;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +45,12 @@ public class FragmentGoodsXinpin extends Fragment {
         view=inflater.inflate(R.layout.fragment_goods_xinpin, container, false);
         init();
         //线程启动
-        String sql = "select * from goods order by goodsDate desc;";
+        if (goods_name==null){
+            sql= "select * from goods order by goodsDate desc;";
+        }
+        else {
+            sql = "select * from goods where goodsName like "+"'"+"%"+goods_name+"%"+"'"+" order by goodsDate desc;";
+        }
         dBdao = new com.example.fxg.ggg.dao.DBdao(sql);
         dBdao.start();
         try {

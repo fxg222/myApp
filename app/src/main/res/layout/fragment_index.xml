@@ -5,12 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".FragmentIndex">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- TODO: Update blank fragment layout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/main_recylist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />-->
+    <GridView
+        android:id="@+id/gridView_index"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="'首页'界面"
-        android:textSize="25sp"/>
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="10dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="1"
+        android:verticalSpacing="10dp"></GridView>
 
 </FrameLayout>

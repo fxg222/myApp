@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ZhuceActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/textView_zhucename"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:text="" />
+
+        <EditText
+            android:inputType="textPassword"
+            android:id="@+id/textView_zhucepassword"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:text="" />
+
+        <EditText
+            android:inputType="textPassword"
+            android:id="@+id/textView_zhucepassword2"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/textView_nicheng"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:text="" />
+
+        <Button
+            android:id="@+id/button_zhuce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="注册"
+            tools:text="注册" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

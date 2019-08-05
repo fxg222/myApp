@@ -161,7 +161,7 @@ public class SearchActivity extends AppCompatActivity {
 
     //在两个Activity之间传值
     public void by_value(String name,String value){
-        Intent i=new Intent(SearchActivity.this,ActivityMain.class);
+        Intent i=new Intent(SearchActivity.this,SearchGoodsActivity.class);
         i.putExtra(name,value);
         startActivity(i);
     }

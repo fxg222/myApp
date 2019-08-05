@@ -1,7 +1,11 @@
 package com.example.fxg.ggg;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,7 +23,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentGoods extends Fragment implements View.OnClickListener{
-
+    String goods_name=null;
     View view;
     LinearLayout goods;
     TextView  textView_zonghe,textView_xiaoliang,textView_xinpin,textView_price;
@@ -28,9 +32,26 @@ public class FragmentGoods extends Fragment implements View.OnClickListener{
     List<Fragment> my_fragment_list;
     List<TextView> tv_list;
     FragmentPagerAdapter fpa;
-
+    @SuppressLint("HandlerLeak")
+    private Handler handler=new Handler(){
+        public void handleMessage(Message message){
+            if(message.what==2){
+                view_pager_goods.setOffscreenPageLimit(4);//ViewPager的缓存为4帧
+                view_pager_goods.setSlide(false);
+                view_pager_goods.setAdapter(fpa);
+                view_pager_goods.setCurrentItem(0);//初始设置ViewPager选中第一帧
+                textView_zonghe.setBackgroundResource(R.color.black);
+                textView_zonghe.setTextColor(getActivity().getResources().getColor(R.color.white));
+            }
+        }
+    };
     public FragmentGoods() {
         // Required empty public constructor
+    }
+    @SuppressLint("ValidFragment")
+    public FragmentGoods(String goods_name) {
+        // Required empty public constructor
+        this.goods_name=goods_name;
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -43,17 +64,29 @@ public class FragmentGoods extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_goods, container, false);
-        init();
+        MyThread myThread=new MyThread( );
+        Thread th=new Thread(myThread);
+        th.start();
+       // init();
 
-        view_pager_goods.setOffscreenPageLimit(4);//ViewPager的缓存为4帧
-        view_pager_goods.setSlide(false);
-        view_pager_goods.setAdapter(fpa);
-        view_pager_goods.setCurrentItem(0);//初始设置ViewPager选中第一帧
-        textView_zonghe.setBackgroundResource(R.color.black);
-        textView_zonghe.setTextColor(this.getResources().getColor(R.color.white));
+//        view_pager_goods.setOffscreenPageLimit(4);//ViewPager的缓存为4帧
+//        view_pager_goods.setSlide(false);
+//        view_pager_goods.setAdapter(fpa);
+//        view_pager_goods.setCurrentItem(0);//初始设置ViewPager选中第一帧
+//        textView_zonghe.setBackgroundResource(R.color.black);
+//        textView_zonghe.setTextColor(this.getResources().getColor(R.color.white));
         return view;
     }
-
+    public void onStart() {
+        super.onStart();
+//        init();
+//        view_pager_goods.setOffscreenPageLimit(4);//ViewPager的缓存为4帧
+//        view_pager_goods.setSlide(false);
+//        view_pager_goods.setAdapter(fpa);
+//        view_pager_goods.setCurrentItem(0);//初始设置ViewPager选中第一帧
+//        textView_zonghe.setBackgroundResource(R.color.black);
+//        textView_zonghe.setTextColor(this.getResources().getColor(R.color.white));
+    }
     //初始化方法
     private void init(){
         goods=view.findViewById(R.id.goods);
@@ -76,11 +109,18 @@ public class FragmentGoods extends Fragment implements View.OnClickListener{
         textView_xiaoliang.setOnClickListener(this);
         textView_xinpin.setOnClickListener(this);
         textView_price.setOnClickListener(this);
-
-        fragment_zonghe=new FragmentGoodsZonghe();
-        fragment_xiaolaing=new FragmentGoodsXiaoliang();
-        fragment_xinpin=new FragmentGoodsXinpin();
-        fragment_price=new FragmentGoodsPrice();
+        if(goods_name==null){
+            fragment_zonghe=new FragmentGoodsZonghe();
+            fragment_xiaolaing=new FragmentGoodsXiaoliang();
+            fragment_xinpin=new FragmentGoodsXinpin();
+            fragment_price=new FragmentGoodsPrice();
+        }
+        else {
+            fragment_zonghe=new FragmentGoodsZonghe(goods_name);
+            fragment_xiaolaing=new FragmentGoodsXiaoliang(goods_name);
+            fragment_xinpin=new FragmentGoodsXinpin(goods_name);
+            fragment_price=new FragmentGoodsPrice(goods_name);
+        }
 
         my_fragment_list=new ArrayList<Fragment>();
         my_fragment_list.add(fragment_zonghe);
@@ -126,7 +166,7 @@ public class FragmentGoods extends Fragment implements View.OnClickListener{
         }
     }
 
-    public class FragmentViewPagerAdatater extends FragmentPagerAdapter {
+    public static class FragmentViewPagerAdatater extends FragmentPagerAdapter {
 
         List<Fragment> fragments_data_list;
         public FragmentViewPagerAdatater(FragmentManager fm,List<Fragment> fragmentList) {
@@ -144,7 +184,16 @@ public class FragmentGoods extends Fragment implements View.OnClickListener{
             return fragments_data_list.size();
         }
     }
+    private class MyThread implements Runnable{
 
-
-
+        @Override
+        public void run() {
+            Looper.prepare();
+            init();
+            Message message=new Message();
+            message.what=2;
+            handler.sendMessage(message);
+            Looper.loop();
+        }
+    }
 }

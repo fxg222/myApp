@@ -15,7 +15,7 @@ import java.util.List;
 public class ActivityDetails extends AppCompatActivity {
     ImageView imageView1,imageView2,imageView3;
     List<ImageView>imageViewList=new ArrayList<>();
-    TextView tv_goods_name,tv_goods_sales;
+    TextView tv_goods_name,tv_goods_sales,textView_details_changed;
     String name;
     float sales;
     @Override
@@ -38,15 +38,35 @@ public class ActivityDetails extends AppCompatActivity {
         DetailsPicAdapter adapter=new DetailsPicAdapter(imageViewList);
         ViewPager viewPager=(ViewPager) findViewById(R.id.viewPager_details_pic);
         viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                textChanged(i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
         tv_goods_name.setText(goodsBean.getName());
         tv_goods_sales.setText("销量"+goodsBean.getSales());
     }
     public void init(){
         //imageView1=findViewById(R.id.imageView_details_pic);
+        textView_details_changed=findViewById(R.id.textView_details_changed);
         imageView1=new ImageView(this);
         imageView2=new ImageView(this);
         imageView3=new ImageView(this);
         tv_goods_name=findViewById(R.id.textView_details_goodsName);
         tv_goods_sales=findViewById(R.id.textView_details_goodsSales);
+    }
+    public void textChanged(int position){
+        textView_details_changed.setText(position+1+"/3");
     }
 }

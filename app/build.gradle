@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.example.fxg.ggg"
         minSdkVersion 15
-        targetSdkVersion 28
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -28,4 +28,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation files('libs/mysql-connector-java-5.1.6-bin.jar')
     implementation files('libs/universal-image-loader-1.9.5.jar')
+    implementation project(':vitamio')
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    compile project(path: ':library')
+    //compile project(path: ':library')
+    //implementation project(':library')
 }
